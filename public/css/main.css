@@ -1,86 +1,86 @@
 html {
-	font-size: 18px; 
+	font-size: 16px; 
 	min-height: 100%;
 	margin-bottom: 1px;
-  }
+}
   
 body {
 	font-size: 1rem;
-	font-family: 'Roboto', sans-serif;
-	color: #333;
-	background: #f4f4f4 repeat-x;
-  }
+	font-family: 'Arial', sans-serif;
+	color: #555;
+	background: #eaeaea repeat-x;
+}
   
 td.title {
-	background-color: #ff6347;
+	background-color: #4169e1;
 	text-align: center;
 	border-style: outset;
 	border-width: 1;
-	font-size: 14pt;
+	font-size: 16pt;
 	color: #FFFFFF;
 	font-weight: bold;
-	box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-  }
+	box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+}
   
 td.field {
-	background-color: #FAFAD2;
+	background-color: #dcdcdc;
 	border-style: inset;
 	border-width: 0;
-	font-size: 11pt;
-	color: #333;
-  }
+	font-size: 12pt;
+	color: #444;
+}
   
 td.value {
 	background-color: #FFFFFF;
 	border-width: 1;
-	font-size: 11pt;
-	color: #333;
-	box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-  }
+	font-size: 12pt;
+	color: #444;
+	box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+}
   
 td.tabletab {
 	background-color: #FFFFFF;
 	border-style: inset;
 	border-width: 0;
-	font-size: 11pt;
-	color: #8B4513;
+	font-size: 12pt;
+	color: #8a2be2;
 	font-weight: bold;
-  }
+}
   
 a.prev,
 a.next {
-	font-size: 11pt;
-	color: #8B4513;
+	font-size: 12pt;
+	color: #8a2be2;
 	font-weight: bold;
-  }
+}
   
 #content {
-  }
+}
   
 #content h1 {
-	font-size: 2.6em;
+	font-size: 2.4em;
 	font-weight: normal;
 	line-height: 35px;
 	margin: 0px 0 60px 0;
-  }
+}
   
 #content p {
-	font-size: 1.6em;
+	font-size: 1.4em;
 	line-height: 24px;
 	margin-bottom: 25px;
-	color: #333;
-  }
+	color: #444;
+}
   
 #gallery {
 	position: relative;
-  }
+}
   
 #pictures {
 	position: relative;
 	width: 360px;
 	height: auto;
-	box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-  }
+	box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+}
   
 #pictures img {
 	position: absolute;
@@ -88,14 +88,14 @@ a.next {
 	top: 0;
 	right: 0;
 	left: 0;
-  }
+}
   
 #prev,
 #next {
 	margin-top: 530px;
 	text-align: left;
-	font-size: 1.2em;
-  }
+	font-size: 1.1em;
+}
   
 a.dp-choose-date {
 	float: left;
@@ -107,15 +107,15 @@ a.dp-choose-date {
 	text-indent: -2000px;
 	overflow: hidden;
 	background: url(calendar.png) no-repeat;
-  }
+}
   
 a.dp-choose-date.dp-disabled {
 	background-position: 0 -20px;
 	cursor: default;
-  }
+}
   
 input.dp-applied {
 	width: 140px;
 	float: left;
-	box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-  }
+	box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+}
