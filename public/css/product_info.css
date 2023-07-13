@@ -1,0 +1,145 @@
+@charset "utf-8";
+
+/* Product Info Table layout
+*************************************************************/
+table#productInfo_table {
+	height: auto;
+	position: center;
+	width: 60%;
+	height: auto;
+	margin-top: 0px;
+	margin-left: 18%;
+}
+
+div#extraInfo_Area {
+	width: 100%;
+	height: auto;
+	margin: 0 0 0 0;
+}
+
+table#extraInfo_table {
+	width: 100%;
+	height: auto;
+	margin: 0px;
+}
+
+table#productInfo_table td#productName {
+	height: auto;
+	text-align: center;
+	vertical-align: top;
+	font-size: 1.9em;
+	font-weight: bold;
+	color: #00796B;
+	padding: 0px 12px 12px 7px;
+	font-family: 'Roboto', sans-serif;
+}
+
+table#productInfo_table td#productImg {
+	width: auto;
+	height: auto;
+	text-align: left;
+	vertical-align: top;
+	padding: 0px 0px 0px 0px;
+}
+
+table#productInfo_table td#productLabel,
+table#extraInfo_table td#productLabel {
+	color: #673AB7;
+	text-align: right;
+	vertical-align: top;
+	padding: 0px 7px 9px 12px;	
+	width: 8.5em;
+	line-height: 1.5em;
+	font-family: 'Roboto', sans-serif;
+}
+
+table#productInfo_table td#productDesc,
+table#extraInfo_table td#productDesc {
+	text-align: left;
+	vertical-align: top;
+	padding: 0px 12px 9px 7px;
+	width: 26em;
+	line-height: 1.5em;
+	font-size: 1.1em;
+	font-family: 'Roboto', sans-serif;
+}
+
+form#productInfo_currency{
+	float: left;
+	margin: 0;
+	padding: 0;
+	width: auto;
+}
+
+.productInfo_currency_select {
+	position: relative;
+	top: 3px;
+	border: 1px solid #888;
+	text-indent: 1px;	
+	letter-spacing: 1px;
+	font-size: 1.1em;
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+}
+
+.productInfo_currency_select_eng {
+	position: relative;
+	top: 3px;
+	font-family: 'Roboto', sans-serif;
+	letter-spacing: 0;
+	border: 1px solid #888;
+	text-indent: 1px;
+	font-size: 1.1em;
+	margin: 0 0 7px 0;
+}
+
+div#currency_notice,
+div#currency_notice_eng {
+	float: left;
+	width: 185px;
+	position: relative;
+	top: 0px;
+	left: 15px;
+	color: #757575;
+	font-family: 'Roboto', sans-serif;
+	letter-spacing: 0;
+}
+
+span#originalPrice_label {
+	padding: 0 1em 0 0;
+	text-align: right;
+	margin-left: 0em;
+	text-decoration: line-through;
+	letter-spacing: 0px;
+	font-family: 'Roboto', sans-serif;
+}
+
+span#newPrice_label {
+	color: #D32F2F;
+	padding: 0 0.7em 0 0;	
+	text-align: right;
+	margin-left: 0em;
+	font-weight: bold;
+	letter-spacing: 0px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.5em;
+}
+
+a:link.extraInfo_link,
+a:visited.extraInfo_link,
+a:active.extraInfo_link {
+	position: relative;
+	left: -3px;
+	padding: 4px;
+	color: #757575;
+}
+
+a:hover.extraInfo_link{
+	background-color: #FFE082;
+}
+
+.extraInfo_img {
+	position: relative;
+	top: 2px;
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}

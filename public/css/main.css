@@ -1,0 +1,121 @@
+html {
+	font-size: 18px; 
+	min-height: 100%;
+	margin-bottom: 1px;
+  }
+  
+body {
+	font-size: 1rem;
+	font-family: 'Roboto', sans-serif;
+	color: #333;
+	background: #f4f4f4 repeat-x;
+  }
+  
+td.title {
+	background-color: #ff6347;
+	text-align: center;
+	border-style: outset;
+	border-width: 1;
+	font-size: 14pt;
+	color: #FFFFFF;
+	font-weight: bold;
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  }
+  
+td.field {
+	background-color: #FAFAD2;
+	border-style: inset;
+	border-width: 0;
+	font-size: 11pt;
+	color: #333;
+  }
+  
+td.value {
+	background-color: #FFFFFF;
+	border-width: 1;
+	font-size: 11pt;
+	color: #333;
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+  }
+  
+td.tabletab {
+	background-color: #FFFFFF;
+	border-style: inset;
+	border-width: 0;
+	font-size: 11pt;
+	color: #8B4513;
+	font-weight: bold;
+  }
+  
+a.prev,
+a.next {
+	font-size: 11pt;
+	color: #8B4513;
+	font-weight: bold;
+  }
+  
+#content {
+  }
+  
+#content h1 {
+	font-size: 2.6em;
+	font-weight: normal;
+	line-height: 35px;
+	margin: 0px 0 60px 0;
+  }
+  
+#content p {
+	font-size: 1.6em;
+	line-height: 24px;
+	margin-bottom: 25px;
+	color: #333;
+  }
+  
+#gallery {
+	position: relative;
+  }
+  
+#pictures {
+	position: relative;
+	width: 360px;
+	height: auto;
+	box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+  }
+  
+#pictures img {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	right: 0;
+	left: 0;
+  }
+  
+#prev,
+#next {
+	margin-top: 530px;
+	text-align: left;
+	font-size: 1.2em;
+  }
+  
+a.dp-choose-date {
+	float: left;
+	width: 16px;
+	height: 16px;
+	padding: 0;
+	margin: 5px 3px 0;
+	display: block;
+	text-indent: -2000px;
+	overflow: hidden;
+	background: url(calendar.png) no-repeat;
+  }
+  
+a.dp-choose-date.dp-disabled {
+	background-position: 0 -20px;
+	cursor: default;
+  }
+  
+input.dp-applied {
+	width: 140px;
+	float: left;
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+  }
