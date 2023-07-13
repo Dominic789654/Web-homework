@@ -1,5 +1,3 @@
-
-
 @extends('layout')
 
 @section('content')
@@ -13,6 +11,14 @@
 <link rel="stylesheet" type="text/css" href="/css/960.css" />
 <script type="text/javascript" src="/js/jquery-3.6.4.min.js"></script>
 <script type="text/javascript" src="/js/slideshow.js"></script>
+
+<!-- load jQuery and tablesorter scripts -->
+<!-- <script type="text/javascript" src="/js/jquery-latest.js"></script> -->
+<script type="text/javascript" src="/js/jquery.tablesorter.js"></script>
+
+<!-- tablesorter widgets (optional) -->
+<script type="text/javascript" src="/js/jquery.tablesorter.widgets.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script> -->
 <script type="text/javascript">
 $(document).ready(function() {
     // (a little sooner than page load)
@@ -131,42 +137,39 @@ function currency_translate2() {
             </td>
         </tr>
         <tr>
-                        <td class="productImg" rowspan="13" colspan="2" align="center">
-                        <center>
-                                                                <div class="container_12" id="wrapper">
-                                                              <div class="grid_8" id="content">
-                                                                       <div class="grid_6 prefix_1 suffix_1" id="gallery">
-
-                                                                  <div id="pictures">
-                                                                      <img src="/images/books/{{ $book->isbn}}-12.png" alt="" />
-                                                                        <img src="/images/books/{{ $book->isbn}}-11.png" alt="" />
-                                                                        <img src="/images/books/{{ $book->isbn}}-10.png" alt="" />
-                                                                        <img src="/images/books/{{ $book->isbn}}-09.png" alt="" />
-                                                                        <img src="/images/books/{{ $book->isbn}}-08.png" alt="" />
-                                                                        <img src="/images/books/{{ $book->isbn}}-07.png" alt="" />
-                                                                        <img src="/images/books/{{ $book->isbn}}-06.png" alt="" />
-                                                                        <img src="/images/books/{{ $book->isbn}}-05.png" alt="" />
-                                                                        <img src="/images/books/{{ $book->isbn}}-04.png" alt="" />
-                                                                        <img src="/images/books/{{ $book->isbn}}-03.png" alt="" />
-                                                                        <img src="/images/books/{{ $book->isbn}}-02.png" alt="" />
-                                                                        <img src="/images/books/{{ $book->isbn}}-01.png" alt="" />
-                                                                    </div>
-
-                                                                  <div class="grid_3" id="prev">
-                                                                    <a href="#previous">&laquo; Previous page</a>
-                                                                  </div>
-                                                                  <div class="grid_3" id="next" >
-                                                                    <a href="#next">Next page &raquo;</a>
-                                                                  </div>
-
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                        </center>
-                        </td>
-                </tr>
+            <td class="productImg" rowspan="13" colspan="2" align="center">
+            <center>
+                <div class="container_12" id="wrapper">
+                    <div class="grid_8" id="content">
+                        <div class="grid_6 prefix_1 suffix_1" id="gallery">
+                            <div id="pictures">
+                                <img src="/images/books/{{ $book->isbn}}-12.png" alt="" />
+                                <img src="/images/books/{{ $book->isbn}}-11.png" alt="" />
+                                <img src="/images/books/{{ $book->isbn}}-10.png" alt="" />
+                                <img src="/images/books/{{ $book->isbn}}-09.png" alt="" />
+                                <img src="/images/books/{{ $book->isbn}}-08.png" alt="" />
+                                <img src="/images/books/{{ $book->isbn}}-07.png" alt="" />
+                                <img src="/images/books/{{ $book->isbn}}-06.png" alt="" />
+                                <img src="/images/books/{{ $book->isbn}}-05.png" alt="" />
+                                <img src="/images/books/{{ $book->isbn}}-04.png" alt="" />
+                                <img src="/images/books/{{ $book->isbn}}-03.png" alt="" />
+                                <img src="/images/books/{{ $book->isbn}}-02.png" alt="" />
+                                <img src="/images/books/{{ $book->isbn}}-01.png" alt="" />
+                            </div>
+                            <div class="grid_3" id="prev">
+                                <a href="#previous">&laquo; Previous page</a>
+                            </div>
+                            <div class="grid_3" id="next" >
+                                <a href="#next">Next page &raquo;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </center>
+            </td>
+        </tr>
     </tbody>
-  </table>
+</table>
 
 </article>
 <aside>
@@ -179,69 +182,83 @@ function currency_translate2() {
             </span>
         </div>
     </form>
-  </aside>
+</aside>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
+
+<style>
+.table-striped tbody tr:nth-child(odd) {
+    background-color: #f9f9f9; /* Light gray color for odd rows */
+}
+.table-striped tbody tr:nth-child(even) {
+    background-color: #ffffff; /* White color for even rows */
+}
+.table-striped tbody tr:nth-child(3n+1) {
+    background-color: #f2f2f2; /* Another color for every third row */
+}
+</style>
+
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#search-form').on('submit', function(e){
+    $('#search-form').on('submit', function(e) {
         e.preventDefault();
         var value = $('#search-form input[name=search]').val();
-        console.log("input",value);
         $.ajax({
-            type : 'get',
-            url : '{{ route('books.search') }}',
+            type: 'get',
+            url: '{{ route('books.search') }}',
             data: { 'search': value },
-            success: function(data){
-                 // 构造结果表格HTML
-                console.log(data);
-                var tableHtml = '<table>';
-
-                tableHtml += '<tr>';
+            success: function(data) {
+                // Construct the result table HTML
+                var tableHtml = '<table class="searched_table">';
+                tableHtml += '<thead><tr>';
                 tableHtml += '<th>Name</th>';
                 tableHtml += '<th>Author</th>';
                 tableHtml += '<th>Publisher</th>';
                 tableHtml += '<th>Price</th>';
                 tableHtml += '<th>Cover</th>';
-                tableHtml += '</tr>';
+                tableHtml += '</tr></thead><tbody>';
 
-                // 循环数据拼接每行
+                // Loop through the data to construct each row
                 $.each(data, function(index, book) {
+                    tableHtml += '<tr>';
+                    tableHtml += '<td>' + book.name + '</td>';
+                    tableHtml += '<td>' + book.author + '</td>';
+                    tableHtml += '<td>' + book.publisher + '</td>';
+                    tableHtml += '<td>' + book.price + '</td>';
 
-                tableHtml += '<tr>';
-                tableHtml += '<td>' + book.name + '</td>';
-                tableHtml += '<td>' + book.author + '</td>';
-                tableHtml += '<td>' + book.publisher + '</td>';
-                tableHtml += '<td>' + book.price + '</td>';
-                
-                // 封面图片
-                var imgHtml = '<img class="book-cover" src="' + book.image_url + '">';
-                tableHtml += '<td>' + imgHtml + '</td>';
+                    // Book cover image
+                    var imgHtml = '<img class="book-cover" src="' + book.image_url + '">';
+                    tableHtml += '<td>' + imgHtml + '</td>';
 
-                tableHtml += '</tr>';
-
+                    tableHtml += '</tr>';
                 });
 
-                tableHtml += '</table>';
+                tableHtml += '</tbody></table>';
 
-                // 插入构造的HTML
+                // Insert the constructed HTML
                 $('table.table tbody').html(tableHtml);
-                // $('table.table tbody').html(data);
-                $('.book-cover').click(function(){
 
-                var imgSrc = $(this).attr('src');
+                $('.book-cover').click(function() {
+                    var imgSrc = $(this).attr('src');
 
-                var popup = '<div class="img-popup">' +
+                    var popup = '<div class="img-popup">' +
                         '<img src="' + imgSrc + '">' +
-                        '<button class="close">关闭</button>' +
+                        '<button class="close">Close</button>' +
                         '</div>';
 
-                $('body').append(popup);
+                    $('body').append(popup);
 
-                $('.close').click(function(){
-                $('.img-popup').remove();
+                    $('.close').click(function() {
+                        $('.img-popup').remove();
+                    });
                 });
-                     
+
+                // Remove any existing tablesorter initialization
+                $(".searched_table").trigger('destroy');
+
+                // Initialize tablesorter on the dynamic table
+                $(".searched_table").tablesorter({
+                    theme: 'blue'
                 });
             },
             error: function(error) {
