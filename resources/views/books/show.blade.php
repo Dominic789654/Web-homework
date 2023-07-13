@@ -139,17 +139,17 @@ function currency_translate2() {
 
                                                                   <div id="pictures">
                                                                       <img src="/images/books/{{ $book->isbn}}-12.png" alt="" />
-                                                                                                                <img src="/images/books/{{ $book->isbn}}-11.png" alt="" />
-                                                                                                                <img src="/images/books/{{ $book->isbn}}-10.png" alt="" />
-                                                                                                                <img src="/images/books/{{ $book->isbn}}-09.png" alt="" />
-                                                                                                                <img src="/images/books/{{ $book->isbn}}-08.png" alt="" />
-                                                                                                                <img src="/images/books/{{ $book->isbn}}-07.png" alt="" />
-                                                                                                                <img src="/images/books/{{ $book->isbn}}-06.png" alt="" />
-                                                                                                                <img src="/images/books/{{ $book->isbn}}-05.png" alt="" />
-                                                                                                                <img src="/images/books/{{ $book->isbn}}-04.png" alt="" />
-                                                                                                                <img src="/images/books/{{ $book->isbn}}-03.png" alt="" />
-                                                                                                                <img src="/images/books/{{ $book->isbn}}-02.png" alt="" />
-                                                                                                                <img src="/images/books/{{ $book->isbn}}-01.png" alt="" />
+                                                                        <img src="/images/books/{{ $book->isbn}}-11.png" alt="" />
+                                                                        <img src="/images/books/{{ $book->isbn}}-10.png" alt="" />
+                                                                        <img src="/images/books/{{ $book->isbn}}-09.png" alt="" />
+                                                                        <img src="/images/books/{{ $book->isbn}}-08.png" alt="" />
+                                                                        <img src="/images/books/{{ $book->isbn}}-07.png" alt="" />
+                                                                        <img src="/images/books/{{ $book->isbn}}-06.png" alt="" />
+                                                                        <img src="/images/books/{{ $book->isbn}}-05.png" alt="" />
+                                                                        <img src="/images/books/{{ $book->isbn}}-04.png" alt="" />
+                                                                        <img src="/images/books/{{ $book->isbn}}-03.png" alt="" />
+                                                                        <img src="/images/books/{{ $book->isbn}}-02.png" alt="" />
+                                                                        <img src="/images/books/{{ $book->isbn}}-01.png" alt="" />
                                                                     </div>
 
                                                                   <div class="grid_3" id="prev">
@@ -171,7 +171,7 @@ function currency_translate2() {
 </article>
 <aside>
     <h2>Search Books</h2>
-    <form action="{{ route('books.search') }}" method="get">
+    <form id="search-form" action="{{ route('books.search') }}" method="get">
         <div class="form-group">
             <input type="text" name="search" class="form-control" placeholder="Search for a book...">
             <span class="input-group-btn">
@@ -180,4 +180,75 @@ function currency_translate2() {
         </div>
     </form>
   </aside>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#search-form').on('submit', function(e){
+        e.preventDefault();
+        var value = $('#search-form input[name=search]').val();
+        console.log("input",value);
+        $.ajax({
+            type : 'get',
+            url : '{{ route('books.search') }}',
+            data: { 'search': value },
+            success: function(data){
+                 // 构造结果表格HTML
+                console.log(data);
+                var tableHtml = '<table>';
+
+                tableHtml += '<tr>';
+                tableHtml += '<th>Name</th>';
+                tableHtml += '<th>Author</th>';
+                tableHtml += '<th>Publisher</th>';
+                tableHtml += '<th>Price</th>';
+                tableHtml += '<th>Cover</th>';
+                tableHtml += '</tr>';
+
+                // 循环数据拼接每行
+                $.each(data, function(index, book) {
+
+                tableHtml += '<tr>';
+                tableHtml += '<td>' + book.name + '</td>';
+                tableHtml += '<td>' + book.author + '</td>';
+                tableHtml += '<td>' + book.publisher + '</td>';
+                tableHtml += '<td>' + book.price + '</td>';
+                
+                // 封面图片
+                var imgHtml = '<img class="book-cover" src="' + book.image_url + '">';
+                tableHtml += '<td>' + imgHtml + '</td>';
+
+                tableHtml += '</tr>';
+
+                });
+
+                tableHtml += '</table>';
+
+                // 插入构造的HTML
+                $('table.table tbody').html(tableHtml);
+                // $('table.table tbody').html(data);
+                $('.book-cover').click(function(){
+
+                var imgSrc = $(this).attr('src');
+
+                var popup = '<div class="img-popup">' +
+                        '<img src="' + imgSrc + '">' +
+                        '<button class="close">关闭</button>' +
+                        '</div>';
+
+                $('body').append(popup);
+
+                $('.close').click(function(){
+                $('.img-popup').remove();
+                });
+                     
+                });
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+});
+</script>
 @endsection

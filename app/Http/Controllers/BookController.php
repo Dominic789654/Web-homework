@@ -21,27 +21,19 @@ class BookController extends Controller
     public function search(Request $request)
     {
         try {
-            $search = $request->get('search');
-            $books = Book::where('name', 'like', '%' . $search . '%')->get();
-    
-            $response = '';
-    
-            foreach($books as $book) {
-                $response .= '<tr>
-                    <td><a href="'.route('books.show',$book->id).'">'.$book->id.'</a></td>
-                    <td><a href="'.route('books.show',$book->id).'">'.$book->name.'</a></td>
-                    <td>'.$book->author.'</td>
-                    <td>'.$book->price.'</td>
-                 </tr>';
-            }
-    
-            return $response;
+            // dd($request->all());
+            $search = $request->input('search');
+            // dd($search);
+            // dd($request);
+            // $search = "java";
+            $books = Book::where('name', 'LIKE', '%' .$search. '%')->get();
+
+            return response()->json($books); 
         } catch (\Exception $e) {
             Log::error('Error in search: '.$e->getMessage());
             return '';
         }
     }
-    
 
     /**
      * Show the form for creating a new resource.

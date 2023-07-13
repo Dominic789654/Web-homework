@@ -37,32 +37,7 @@
   </table>
 <div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-  $('form').on('submit', function(e) {
-    e.preventDefault();
-    var searchQuery = $(this).find('input[name="search"]').val(); // 获取搜索查询值
 
-    $.ajax({
-      url: "{{ route('books.search') }}",
-      type: "GET",
-      data: { search: searchQuery },
-      success: function(response) {
-        // 清除现有的搜索结果
-        $('table.table tbody').empty();
 
-        // 插入新的搜索结果
-        $('table.table tbody').append(response);
-      },
-      error: function(error) {
-        console.log(error);
-      }
-    });
-  });
-});
-</script>
-
-</script>
 
 @endsection
