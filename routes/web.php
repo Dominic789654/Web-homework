@@ -2,24 +2,23 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
+use App\Http\Controllers\BookRequestController;
+use App\Http\Controllers\HomeController;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+Route::get('/', [BookController::class, 'index'])->name('index');
 
 Route::get('/books/search', [BookController::class, 'search'])->name('books.search');
-Route::get('/', [BookController::class, 'index'])->name('home');
 Route::get('/books/all', [BookController::class, 'getAll'])->name('books.all');
 
-Route::resource('books', BookController::class);
+// Authentication Routes
+Auth::routes();
+
+// Authenticated Routes
+Route::middleware(['auth'])->group(function () {
+    Route::post('/bookrequest', [BookRequestController::class, 'store'])->name('bookrequest.store');
+    Route::resource('book-requests', BookRequestController::class);
+});
+
+Route::get('/home', [HomeController::class, 'index'])->name('dashboard');

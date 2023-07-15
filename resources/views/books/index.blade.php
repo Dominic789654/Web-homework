@@ -2,11 +2,30 @@
 
 @section('content')
 <style>
+      .form-group {
+        margin-bottom: 15px;
+    }
+    .form-group label {
+        font-weight: bold;
+    }
+    .form-group input {
+        width: 100%;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    .form-group input[type="submit"] {
+        width: auto;
+        background-color: #00796B;
+        color: white;
+    }
   .uper {
     margin-top: 40px;
     /* Define the default row color */
   }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/theme.default.min.css">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 table#book-table tr {
         background-color: #f30000; /* Red */
     }
@@ -28,6 +47,61 @@ table#book-table tr {
       {{ session()->get('success') }}  
     </div><br />
   @endif
+  @if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    </div>
+  @endif
+  <div class="login-status">
+    @if(Auth::check())
+        <p>You are logged in, welcome. {{ Auth::user()->name }}!</p>
+        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-danger">Log out</a>
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    @else
+        <p>Please log in, you have not logged in yet.</p>
+        <a href="{{ route('login') }}" class="btn btn-primary">Log in</a>
+        <a href="{{ route('register') }}" class="btn btn-primary">Register</a>
+    @endif
+</div>
+
+  <form method="POST" action="{{ route('bookrequest.store') }}">
+    @csrf
+    <div class="form-group">
+        <label for="aliasname">Alias Name:</label>
+        <input type="text" id="aliasname" name="aliasname">
+        <small id="aliasHelp" class="form-text text-muted">Must be at least 8 alphanumeric characters.</small>
+    </div>
+    <div class="form-group">
+        <label for="mobile">Mobile:</label>
+        <input type="text" id="mobile" name="mobile">
+        <small id="mobileHelp" class="form-text text-muted">Must be 8 numbers.</small>
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+        <small id="emailHelp" class="form-text text-muted">Must be a valid email pattern.</small>
+    </div>
+    <div class="form-group">
+        <label for="book_name">Book Name:</label>
+        <input type="text" id="book_name" name="book_name">
+        <small id="bookNameHelp" class="form-text text-muted">Must be at least 10 alphanumeric characters.</small>
+    </div>
+    <div class="form-group">
+        <label for="pickup_date">Pickup Date:</label>
+        <input type="text" id="pickup_date" name="pickup_date">
+        <small id="pickupDateHelp" class="form-text text-muted">Must be a date format.</small>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Submit">
+    </div>
+</form>
 
   <aside>
     <h2>Search Books</h2>
@@ -58,13 +132,17 @@ table#book-table tr {
   </table>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    var $table = $("#book-table");
 
+    $("#pickup_date").datepicker({
+        dateFormat: "yy-mm-dd"
+    });
+    var $table = $("#book-table");
     // Function to populate the table and apply tablesorter
     function populateTable(data) {
         var tableHtml = '';
